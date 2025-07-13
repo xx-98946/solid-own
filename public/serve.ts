@@ -7,7 +7,7 @@ Deno.serve(async (req) => {
 
   // 1. 处理静态文件（自动支持 assets/ 等）
   const res = await serveDir(req, {
-    fsRoot: "./dist", // 打包输出目录
+    fsRoot: "./", // 打包输出目录
     urlRoot: "",
     showDirListing: false,
     enableCors: true,
@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
 
   // 2. 如果找不到文件，回退到 index.html（支持前端路由）
   if (res.status === 404) {
-    const index = await Deno.readFile("./dist/index.html");
+    const index = await Deno.readFile("./index.html");
     return new Response(index, {
       headers: {
         "content-type": "text/html",

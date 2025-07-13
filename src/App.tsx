@@ -26,7 +26,7 @@ export default function App() {
         routes.merge([
             {
                 path: "/Test",
-                component: "@/pages/Test.tsx",
+                component: "@/pages/Test",
             },
         ]);
     });

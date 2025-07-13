@@ -6,11 +6,15 @@ export default function App() {
     const routes = useRoutes([
         {
             path: "/",
-            component: "@/pages/Home.tsx",
+            component: "@/pages/Home",
         },
         {
             path: "*404",
-            component: "@/pages/NotFound.tsx",
+            component: "@/pages/NotFound",
+        },
+        {
+            path: "/CompList",
+            component: "@/pages/CompList",
         },
     ]);
 
@@ -21,7 +25,7 @@ export default function App() {
         // });
         routes.merge([
             {
-                path: "/test",
+                path: "/Test",
                 component: "@/pages/Test.tsx",
             },
         ]);

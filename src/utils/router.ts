@@ -1,7 +1,7 @@
 import { lazy } from "solid-js";
 import { useSignal } from "./";
 import { useCurrentMatches, type RouteDefinition } from "@solidjs/router";
-const modules = import.meta.glob("@/pages/**/*.tsx");
+const modules = import.meta.glob("@/pages/**/index.tsx");
 
 class RouteError extends Error {
     constructor(message: string) {
@@ -11,7 +11,7 @@ class RouteError extends Error {
 }
 
 export function pathToComponent(path: string) {
-    const aliasPath = path.replace(/^@/, "/src");
+    const aliasPath = path.replace(/^@/, "/src") + "/index.tsx";
     const component = modules[aliasPath];
     if (component) {
         // @ts-ignore

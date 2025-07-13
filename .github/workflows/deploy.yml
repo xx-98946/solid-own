@@ -38,5 +38,5 @@ jobs:
               uses: denoland/deployctl@v1
               with:
                   project: "solid-own"
-                  entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
+                  entrypoint: "serve.ts"
                   root: "dist"

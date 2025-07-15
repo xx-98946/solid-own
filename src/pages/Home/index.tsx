@@ -14,6 +14,9 @@ export default function Home() {
             <a href="/test" class="text-blue-500 underline">
                 test
             </a>
+            <a href="/complist" class="text-blue-500 underline">
+                组件库
+            </a>
         </div>
     );
 }

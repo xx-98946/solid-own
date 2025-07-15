@@ -1,31 +1,54 @@
-import { useClass, useSignal } from "@/utils";
-import { test } from "@/apis";
-import { onMount } from "solid-js";
+import { Language } from "@/comps";
+import { useSignal } from "@/utils";
 
 export default function Test() {
-    const count = useSignal(0);
-    const double = useSignal(() => count.get() * 2);
+    let jstemp = `import { Language } from "@/comps";
+import { useSignal } from "@/utils";
 
-    function handleAdd() {
-        count.set((v) => v + 1);
-    }
-
-    onMount(test);
-
+export default function Test() {
+    const value = useSignal({
+        a: "b",
+        c: [
+            "d",
+            {
+                e: {
+                    f: "g",
+                },
+            },
+        ],
+    });
     return (
-        <div class="p-2">
-            <h2 class="text-2xl">Test</h2>
-            <div>count: {count.get()}</div>
-            <button
-                onClick={handleAdd}
-                class={useClass(
-                    "border py-1 px-2 cursor-pointer rounded-sm text-blue-500",
-                    count.get() == 3 && "text-orange-500",
-                )}
-            >
-                +1
-            </button>
-            <div>double: {double.get()}</div>
+        <div>
+            Test
+            <Language type="json">{value.get()}</Language>
+        </div>
+    );
+}
+`;
+    const value = useSignal({
+        a: "b",
+        c: [
+            "d",
+            {
+                e: {
+                    f: "g",
+                },
+            },
+        ],
+    });
+    return (
+        <div>
+            Test
+            <div class="px-4 my-2">
+                <Language type="json" isInline>
+                    {value.get()}
+                </Language>
+            </div>
+            <div class="px-4 my-2">
+                <Language type="javascript" theme="prism">
+                    {jstemp}
+                </Language>
+            </div>
         </div>
     );
 }

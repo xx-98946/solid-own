@@ -10,7 +10,7 @@ export const useEffect = createEffect;
 /**
  * 信号类型
  */
-interface ISignal<T> {
+export interface ISignal<T> {
     get: Accessor<T>;
     set: Setter<T>;
     __type: "signal";
@@ -32,6 +32,7 @@ export function isSignal<T>(val: T) {
 export function useSignal<T>(initValue: ISignal<T>): ISignal<T>;
 export function useSignal<T>(initValue: () => T): ISignal<T>;
 export function useSignal<T>(initValue: T): ISignal<T>;
+export function useSignal<T>(initValue: unknown): ISignal<T>;
 export function useSignal(initValueOrCall: any) {
     /**
      * 1. 是信号返回自身
@@ -63,4 +64,19 @@ export function useSignal(initValueOrCall: any) {
         set,
         __type: "signal",
     };
+}
+
+/**
+ * 异步处理函数
+ * @param cb
+ * @returns
+ */
+export function usePreload<T>(cb: () => Promise<T>) {
+    const data = useSignal<T>(undefined);
+
+    cb().then((res) => {
+        // @ts-ignore
+        data.set(res);
+    });
+    return data;
 }

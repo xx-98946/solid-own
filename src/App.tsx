@@ -28,6 +28,15 @@ export default function App() {
                 path: "/Test",
                 component: "@/pages/Test",
             },
+            {
+                name: "博客详情",
+                path: "/BlogDetail/:id",
+                component: "@/pages/BlogDetail",
+            },
+            {
+                path: "/Blogs",
+                component: "@/pages/Blogs",
+            },
         ]);
     });
     return <Router>{routes.get()}</Router>;

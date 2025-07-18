@@ -28,9 +28,11 @@ export function isSignal<T>(val: T) {
     // @ts-ignore
     return val.__type == "signal";
 }
-
+export function useSignal<T>(initValue: () => Promise<T>): ISignal<T>;
 export function useSignal<T>(initValue: ISignal<T>): ISignal<T>;
-export function useSignal<T>(initValue: () => T): ISignal<T>;
+export function useSignal<T>(
+    initValue: (() => T) | (() => Promise<T>),
+): ISignal<T>;
 export function useSignal<T>(initValue: T): ISignal<T>;
 export function useSignal<T>(initValue: unknown): ISignal<T>;
 export function useSignal(initValueOrCall: any) {
@@ -45,9 +47,14 @@ export function useSignal(initValueOrCall: any) {
      * 2. 如果是函数，则监听该函数作为信号的触发条件，并返回信号
      */
     if (typeof initValueOrCall == "function") {
-        const [get, set] = createSignal(initValueOrCall());
-        useEffect(() => {
-            set(initValueOrCall);
+        const [get, set] = createSignal(null);
+        Promise.resolve(initValueOrCall()).then((value: any) => {
+            set(value);
+        });
+
+        useEffect(async () => {
+            const newValue = await initValueOrCall();
+            set(newValue);
         });
         return {
             get,

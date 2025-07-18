@@ -16,9 +16,12 @@
         "@types/node": "^24.0.13",
         "@types/prismjs": "^1.26.5",
         "axios": "^1.10.0",
+        "marked": "^16.0.0",
         "nanoid": "^5.1.5",
         "prettier": "^3.6.2",
+        "prism-themes": "^1.9.0",
         "prismjs": "^1.30.0",
+        "shiki": "^3.8.0",
         "solid-js": "^1.9.7",
         "tailwind-merge": "^3.3.1",
         "tailwindcss": "^4.1.11"

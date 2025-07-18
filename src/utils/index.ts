@@ -3,7 +3,6 @@ import { nanoid } from "nanoid";
 export * from "./signal";
 export * from "./className";
 export * from "./router";
-export * from "./client";
 
 /**
  * 生成唯一id

@@ -22,6 +22,7 @@ export function pathToComponent(path: string) {
 
 type IRoute = Omit<RouteDefinition, "component"> & {
     component: string;
+    [k: string]: unknown;
 };
 
 function toRoute(route: IRoute): RouteDefinition {

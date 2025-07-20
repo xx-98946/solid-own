@@ -68,6 +68,6 @@ export function useCurrentRoute() {
  * @param path
  * @returns
  */
-export function useActive(path: string) {
+export function useRouteActive(path: string) {
     return useCurrentRoute().path == path;
 }

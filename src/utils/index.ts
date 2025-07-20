@@ -1,23 +1,5 @@
-import { nanoid } from "nanoid";
-
+export { onMount as useMount, onCleanup as useUnMount } from "solid-js";
 export * from "./signal";
 export * from "./className";
 export * from "./router";
-
-/**
- * 生成唯一id
- * @returns
- */
-export function uuid() {
-    return nanoid();
-}
-
-/**
- * 判断两个值是否相等
- * @param a
- * @param b
- * @returns
- */
-export function isSame<T>(a: T, b: T) {
-    return JSON.stringify(a) == JSON.stringify(b);
-}
+export * from "./base";

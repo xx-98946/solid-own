@@ -9,7 +9,7 @@ export function Prose(props: IProps) {
     return (
         <div
             class={useClass(
-                "mx-auto prose prose-pre:m-0 prose-pre:rounded-none prose-h1:mt-4 prose-h2:my-4",
+                "mx-auto prose prose-pre:m-0 prose-h1:mt-4 prose-h2:my-4",
                 props.class,
             )}
         >

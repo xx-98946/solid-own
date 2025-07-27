@@ -7,10 +7,16 @@ export default function Blog() {
     const navigate = useNavigate();
     const blogList = useSignal([
         {
-            name: "个人经验",
-            path: "经验.md",
+            name: "开发经验",
+            path: "开发经验.md",
             desc: "人生在世数十载，能留下的不过是经验。从地心说到日心说，从牛顿力学到量子力学。",
             pubTime: "2025-07-18",
+        },
+        {
+            name: "局域网文件共享服务器",
+            path: "文件共享服务器.md",
+            desc: "该文件共享服务器是用于在局域网内共享文件，只要记住ip地址，就可以在局域网内共享服务。",
+            pubTime: "2025-07-20",
         },
     ]);
 
@@ -25,17 +31,19 @@ export default function Blog() {
                     {(blog) => (
                         <div
                             onClick={() => handleGoDetail(blog.path)}
-                            class="shadow-md p-2 cursor-pointer overflow-hidden bg-gray-50 hover:bg-gray-100 duration-100"
+                            class="shadow-md p-2 pl-4 cursor-pointer overflow-hidden bg-gray-50 hover:bg-gray-100 duration-100 border-l-4 border-l-purple-400"
                         >
-                            <div class="my-3 flex justify-between items-center">
+                            <div class="mt-1 mb-2 flex justify-between items-center">
                                 <span class="text-black text-xl font-bold">
                                     {blog.name}
                                 </span>
-                                <div class="text-sm text-gray-500">
+                                <div class="text-sm text-gray-500 mr-2">
                                     {blog.pubTime}
                                 </div>
                             </div>
-                            <div class="truncate pr-2">{blog.desc}</div>
+                            <div class="truncate pr-2" title={blog.desc}>
+                                {blog.desc}
+                            </div>
                         </div>
                     )}
                 </For>

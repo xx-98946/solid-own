@@ -11,6 +11,7 @@ export const useEffect = createEffect;
  * 信号类型
  */
 export interface ISignal<T> {
+    [k: string]: unknown;
     get: Accessor<T>;
     set: Setter<T>;
     __type: "signal";

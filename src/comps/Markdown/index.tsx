@@ -40,7 +40,7 @@ export function Markdown(props: IProps) {
                 lang: item.lang,
                 dataId: uuid,
             });
-            const handledHtml = `<div class="shadow">${header}${res}</div>`;
+            const handledHtml = `<div class="shadow rounded-sm overflow-hidden">${header}<div class="max-h-[60vh] overflow-auto pl-1">${res}</div></div>`;
             finalHtml.set(finalHtml.get().replace(uuid, handledHtml));
         });
         return uuid;
@@ -133,7 +133,7 @@ const doneSvg = `
  * @returns
  */
 function markdownHeader(props: { lang?: string; dataId?: string }) {
-    return `<div class="pt-2 pb-3 px-4 flex items-center justify-between  w-full shadow-2xl text-xs rounded-t bg-gray-100 text-gray-500">
+    return `<div class="pt-2 pb-3 px-4 flex items-center justify-between  w-full text-xs  bg-gray-100 text-gray-500">
             <span class="text-sm text-gray-500 font-mono">
                 ${props.lang || ""}
             </span>

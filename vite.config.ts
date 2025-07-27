@@ -14,7 +14,7 @@ export default defineConfig({
         host: "0.0.0.0",
         proxy: {
             "/api": {
-                target: "https://my-json-server.typicode.com/typicode",
+                target: "https://narrow-horse-77.deno.dev/",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ""),
             },

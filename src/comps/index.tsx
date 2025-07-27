@@ -5,3 +5,4 @@ export * from "./LanguageShiki";
 export { LanguageShiki as Language } from "./LanguageShiki";
 export * from "./Prose";
 export * from "./Markdown";
+export * from "./Preload";

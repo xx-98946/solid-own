@@ -5,6 +5,20 @@ Deno.serve(async (req) => {
     const url = new URL(req.url);
     const pathname = url.pathname;
 
+    // 配置代理
+    if (url.pathname.startsWith("/api")) {
+        const targetBase = "https://narrow-horse-77.deno.dev/";
+        const targetUrl =
+            targetBase + url.pathname.replace("^/api", "") + url.search;
+        const proxyRequest = new Request(targetUrl, {
+            method: req.method,
+            headers: req.headers,
+            body: req.body,
+            redirect: "manual",
+        });
+        return fetch(proxyRequest);
+    }
+
     // 1. 处理静态文件（自动支持 assets/ 等）
     const res = await serveDir(req, {
         fsRoot: "./", // 打包输出目录

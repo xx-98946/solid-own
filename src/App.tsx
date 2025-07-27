@@ -37,6 +37,10 @@ export default function App() {
                 path: "/Blogs",
                 component: "@/pages/Blogs",
             },
+            {
+                path: "/Navigation",
+                component: "@/pages/Navigation",
+            },
         ]);
     });
     return <Router>{routes.get()}</Router>;

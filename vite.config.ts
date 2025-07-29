@@ -14,9 +14,12 @@ export default defineConfig({
         host: "0.0.0.0",
         proxy: {
             "/api": {
-                target: "https://narrow-horse-77.deno.dev/",
+                // target: "https://solid-own.deno.dev/",
+                target: "https://solid-own-server-mf6acd8dhe5a.xx-98946.deno.net",
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api/, ""),
+                rewrite(path) {
+                    return path.replace(/^\/api/, "");
+                },
             },
         },
     },

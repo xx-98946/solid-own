@@ -1,18 +1,30 @@
 import { getLinkList } from "@/apis";
 import { Preload } from "@/comps";
-import { usePreload } from "@/utils";
+import { useEffect, usePreload, useSignal } from "@/utils";
 import { For } from "solid-js";
 
 export default function Page() {
     const linkList = usePreload(getLinkList);
+    const linkListData = useSignal(() => {
+        if (linkList.get()) {
+            return Object.entries(linkList.get());
+        }
+        return [];
+    });
+
+    useEffect(() => {
+        console.log(linkList.get());
+    });
 
     return (
         <section>
-            <div>网址导航</div>
+            <div class="text-center sticky top-0 bg-white text-2xl p-2 font-bold shadow">
+                网址导航
+            </div>
             <Preload data={linkList}>
-                <div class="grid grid-cols-1 gap-8">
-                    <For each={linkList.get()}>
-                        {({ value, key }) => (
+                <div class="flex flex-wrap gap-8 p-4 w-2/3 m-auto">
+                    <For each={linkListData.get()}>
+                        {([key, value]) => (
                             <a
                                 href={value.link}
                                 class="flex items-center justify-center gap-4"

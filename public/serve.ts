@@ -7,7 +7,8 @@ Deno.serve(async (req) => {
 
     // 配置代理
     if (url.pathname.startsWith("/api")) {
-        const targetBase = "https://narrow-horse-77.deno.dev/";
+        const targetBase =
+            "https://solid-own-server-mf6acd8dhe5a.xx-98946.deno.net";
         const targetUrl =
             targetBase + url.pathname.replace("^/api", "") + url.search;
         const proxyRequest = new Request(targetUrl, {

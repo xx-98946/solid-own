@@ -9,12 +9,4 @@ export async function loadText(path: string) {
     return text;
 }
 
-/**
- * 获取导航的数据
- * @returns
- */
-export async function getLinkList() {
-    const res = await fetch("/api");
-    const data = await res.json();
-    return data;
-}
+export * from "./linkList";

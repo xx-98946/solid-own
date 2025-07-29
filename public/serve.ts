@@ -10,8 +10,8 @@ Deno.serve(async (req) => {
             "https://solid-own-server-mf6acd8dhe5a.xx-98946.deno.net";
         const targetUrl =
             targetBase + pathname.replace(/^\/api/, "") + url.search;
-        console.log("-----------pathname", pathname)
-        console.log(targetUrl)
+        // console.log("-----------pathname", pathname)
+        // console.log(targetUrl)
         const proxyRequest = new Request(targetUrl, {
             method: req.method,
             headers: req.headers,

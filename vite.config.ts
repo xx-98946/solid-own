@@ -2,9 +2,33 @@ import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
+import fs from "node:fs";
+
+/**
+ * 生成多多页面打包
+ * @returns
+ */
+function multipleHtmlInputPlugin() {
+    const htmlFiles = fs
+        .readdirSync(__dirname)
+        .filter((file) => file.endsWith(".html"));
+
+    const input = Object.fromEntries(
+        htmlFiles.map((name) => [
+            name.replace(".html", ""),
+            path.resolve(__dirname, name),
+        ]),
+    );
+    return input;
+}
 
 export default defineConfig({
     plugins: [solid(), tailwindcss()],
+    build: {
+        rollupOptions: {
+            input: multipleHtmlInputPlugin(),
+        },
+    },
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "src"),

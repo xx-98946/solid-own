@@ -13,10 +13,22 @@ export default function Blog() {
             pubTime: "2025-07-18",
         },
         {
-            name: "局域网文件共享服务器",
+            name: "文件共享服务器",
             path: "文件共享服务器.md",
             desc: "该文件共享服务器是用于在局域网内共享文件，只要记住ip地址，就可以在局域网内共享服务。",
             pubTime: "2025-07-20",
+        },
+        {
+            name: "git使用指南",
+            path: "git使用指南.md",
+            desc: "关于git常见命令的指南",
+            pubTime: "2025-07-30",
+        },
+        {
+            name: "信号量机制",
+            path: "信号量机制.md",
+            desc: "一些关于信号量机制的讲解",
+            pubTime: "2025-07-30",
         },
     ]);
 

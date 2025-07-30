@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>信号量测试1</title>
+    </head>
+    <body>
+        <!-- 定义HTML结构 -->
+        <div>
+            <div>
+                <span>姓:</span>
+                <input id="firstName" placeholder="请输入姓" />
+            </div>
+            <div>
+                <span>名:</span>
+                <input id="lastName" placeholder="请输入名" />
+            </div>
+            <div>
+                <span>姓名: </span>
+                <span id="fullName"></span>
+            </div>
+        </div>
+
+        <!-- 操作脚本 -->
+        <script>
+            const firstName = document.getElementById("firstName");
+            const lastName = document.getElementById("lastName");
+            const fullName = document.getElementById("fullName");
+
+            const data = {
+                firstName: "",
+                lastName: "",
+                fullName: "",
+            };
+
+            /**
+             * 更新 fullName 数据
+             * 同时将数据更新到模版上
+             */
+            function updateFullName() {
+                data.fullName = data.firstName + data.lastName;
+                fullName.innerText = data.fullName;
+            }
+
+            firstName.addEventListener("input", (e) => {
+                data.firstName = e.target.value;
+                // 触发更新
+                updateFullName();
+            });
+
+            lastName.addEventListener("input", (e) => {
+                data.lastName = e.target.value;
+                // 触发更新
+                updateFullName();
+            });
+        </script>
+    </body>
+</html>

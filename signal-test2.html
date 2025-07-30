@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>信号量测试2</title>
+    </head>
+    <body>
+        <div>
+            <div>
+                <span>姓:</span>
+                <input id="firstName" placeholder="请输入姓" />
+            </div>
+            <div>
+                <span>名:</span>
+                <input id="lastName" placeholder="请输入名" />
+            </div>
+            <div>
+                <span>姓名: </span>
+                <span id="fullName"></span>
+            </div>
+        </div>
+
+        <script>
+            const firstName = document.getElementById("firstName");
+            const lastName = document.getElementById("lastName");
+            const fullName = document.getElementById("fullName");
+
+            const data = new Proxy(
+                {
+                    firstName: "",
+                    lastName: "",
+                    fullName: "",
+                },
+                {
+                    /**
+                     * 在执行赋值操作时会触发该函数
+                     */
+                    set(obj, prop, newValue) {
+                        // 将新值赋值给原始对象
+                        obj[prop] = newValue;
+                        // 并对不同的属性触发不同的操作
+                        if (prop == "firstName") {
+                            firstName.value = data.firstName;
+                            updateFullName();
+                        } else if (prop == "lastName") {
+                            lastName.value = data.lastName;
+                            updateFullName();
+                        } else if (prop == "fullName") {
+                            fullName.innerText = data.fullName;
+                        }
+                    },
+                },
+            );
+
+            function updateFullName() {
+                data.fullName = data.firstName + data.lastName;
+                // 将更新的操作移动到了 set 函数内
+            }
+
+            firstName.addEventListener("input", (e) => {
+                data.firstName = e.target.value;
+            });
+
+            lastName.addEventListener("input", (e) => {
+                data.lastName = e.target.value;
+            });
+
+            // 测试同步效果
+            data.firstName = "姓";
+            data.lastName = "名";
+
+            console.log(data);
+        </script>
+    </body>
+</html>

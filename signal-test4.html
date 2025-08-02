@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>信号量测试3</title>
+        <title>信号量测试4</title>
     </head>
     <body>
         <div>
@@ -35,25 +35,16 @@
                 },
                 {
                     set(obj, prop, newValue) {
-                        const oldValue = obj[prop];
                         obj[prop] = newValue;
-                        /**
-                         * 通过发布订阅模式触发对应的事件
-                         */
-                        dataEvents.update(prop, newValue, oldValue);
+                        dataEvents.update(prop);
                     },
                 },
             );
 
-            /**
-             * 发布订阅器
-             * 核心就是为每个属性维护了一个函数执行数组
-             * 这样就可以通过 push 操作添加订阅
-             */
             const dataEvents = {
                 update(prop, newValue, oldValue) {
                     dataEvents[prop].forEach((cb) => {
-                        cb(newValue, oldValue);
+                        cb();
                     });
                 },
                 firstName: [],
@@ -62,27 +53,41 @@
             };
 
             /**
-             * 添加函数订阅，对于每个属性都可以单独订阅
+             * 定义监听函数
              */
-            dataEvents.firstName.push(function (newValue) {
-                firstName.value = newValue;
-            });
+            function watch(cb, propers) {
+                propers.forEach((prop) => {
+                    dataEvents[prop].push(cb);
+                });
+            }
 
-            dataEvents.firstName.push(function (newValue) {
-                data.fullName = data.firstName + data.lastName;
-            });
+            watch(
+                function (newValue) {
+                    firstName.value = data.firstName;
+                },
+                ["firstName"],
+            );
 
-            dataEvents.lastName.push(function (newValue) {
-                lastName.value = newValue;
-            });
+            watch(
+                function () {
+                    data.fullName = data.firstName + data.lastName;
+                },
+                ["firstName", "lastName"],
+            );
 
-            dataEvents.lastName.push(function (newValue) {
-                data.fullName = data.firstName + data.lastName;
-            });
+            watch(
+                function () {
+                    lastName.value = data.lastName;
+                },
+                ["lastName"],
+            );
 
-            dataEvents.fullName.push(function (newValue) {
-                fullName.innerText = newValue;
-            });
+            watch(
+                function () {
+                    fullName.innerText = data.fullName;
+                },
+                ["fullName"],
+            );
 
             firstName.addEventListener("input", (e) => {
                 data.firstName = e.target.value;
@@ -94,11 +99,6 @@
 
             data.firstName = "姓";
             data.lastName = "名";
-
-            // 这段代码可以先注释掉，通过在控制套粘贴也是可以被触发的
-            dataEvents.fullName.push(function (newValue, oldValue) {
-                console.log(`将 fullName 从 ${oldValue} 变更为 ${newValue}`);
-            });
 
             console.log(dataEvents);
         </script>

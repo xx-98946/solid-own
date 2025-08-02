@@ -25,10 +25,10 @@ export default function Blog() {
             pubTime: "2025-07-30",
         },
         {
-            name: "信号量机制",
-            path: "信号量机制.md",
-            desc: "一些关于信号量机制的讲解",
-            pubTime: "2025-07-30",
+            name: "响应式机制",
+            path: "响应式机制.md",
+            desc: "一些关于响应式机制的讲解",
+            pubTime: "2025-08-02",
         },
     ]);
 
